@@ -27,6 +27,20 @@ public class Adresse {
 	 */
 	public Adresse() {
 	}
+	
+	/**
+	 * Constructeur
+	 * @param numero
+	 * @param rue
+	 * @param codePostal
+	 * @param ville
+	 */
+	public Adresse(int numero, String rue, int codePostal, String ville) {
+		this.numero = numero;
+		this.rue = rue;
+		this.codePostal = codePostal;
+		this.ville = ville;
+	}
 
 	/** Getter
 	 * @return the numero

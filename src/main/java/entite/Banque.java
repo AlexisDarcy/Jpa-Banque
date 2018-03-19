@@ -3,6 +3,7 @@
  */
 package entite;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -31,15 +32,25 @@ public class Banque {
 	private String nom;
 	/**listClient : Set<Client>*/
 	@OneToMany(mappedBy = "banque")
-	private Set<Client> listeClient;
+	private Set<Client> listeClient = new HashSet<Client>(0);
 	
 	/**
 	 * Constructeur
-	 *
 	 */
 	public Banque() {
 
 	}
+	
+	/**
+	 * Constructeur
+	 * @param id
+	 * @param nom
+	 */
+	public Banque(String nom) {
+		this.nom = nom;
+	}
+
+
 
 	/** Getter
 	 * @return the id

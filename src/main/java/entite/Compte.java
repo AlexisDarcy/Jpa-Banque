@@ -3,6 +3,7 @@
  */
 package entite;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -10,6 +11,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -20,7 +25,8 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "COMPTE")
-public class Compte {
+@Inheritance(strategy = InheritanceType.JOINED)
+public abstract class Compte {
 	
 	/**id : int*/
 	@Id
@@ -34,14 +40,31 @@ public class Compte {
 	@Column(name = "SOLDE")
 	private double solde;
 	/**listClient : Set<Client>*/
-	@ManyToMany(mappedBy="listeCompte")
-	private Set<Client> listeClient;
+	@ManyToMany
+	@JoinTable(name="POSSEDE", 
+		joinColumns=@JoinColumn(name="ID_CPT", referencedColumnName="ID"),
+		inverseJoinColumns=@JoinColumn(name="ID_CLI", referencedColumnName="ID"))
+	private Set<Client> listeClient = new HashSet<Client>(0);
 	/**listeOperation : Set<Operation>*/
 	@OneToMany(mappedBy = "compte")
-	private Set<Operation> listeOperation;
+	private Set<Operation> listeOperation = new HashSet<Operation>(0);
 	
+	/**
+	 * Constructeur
+	 */
 	public Compte() {
 		
+	}
+
+	/**
+	 * Constructeur
+	 * @param id
+	 * @param numero
+	 * @param solde
+	 */
+	public Compte(String numero, double solde) {
+		this.numero = numero;
+		this.solde = solde;
 	}
 
 	/** Getter

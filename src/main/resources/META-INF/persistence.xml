@@ -20,9 +20,9 @@
 		<class>entite.Client</class>
 		<class>entite.Compte</class>
 		<class>entite.Operation</class>
-		<!-- <class>entite.LivretA</class>
+		<class>entite.LivretA</class>
 		<class>entite.AssuranceVie</class>
-		<class>entite.Virement</class> -->
+		<class>entite.Virement</class>
 		<properties>
 			<!--desactiver l'autodetection des classes de type @Entity -->
 			<property name="hibernate.archive.autodetection" value=""/>

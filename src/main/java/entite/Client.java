@@ -4,6 +4,7 @@
 package entite;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -50,15 +51,25 @@ public class Client {
 	@ManyToMany
 	@JoinTable(name="POSSEDE", 
 		joinColumns=@JoinColumn(name="ID_CLI", referencedColumnName="ID"),
-		inverseJoinColumns=@JoinColumn(name="ID_COM", referencedColumnName="ID"))
-	private Set<Compte> listeCompte;
-	
+		inverseJoinColumns=@JoinColumn(name="ID_CPT", referencedColumnName="ID"))
+	private Set<Compte> listeCompte = new HashSet<Compte>(0);
+
 	/**
 	 * Constructeur
-	 *
+	 * @param id
+	 * @param nom
+	 * @param prenom
+	 * @param dateNaissance
+	 * @param adresse
+	 * @param banque
 	 */
-	public Client() {
-		
+	public Client(String nom, String prenom, LocalDate dateNaissance, Adresse adresse, Banque banque) {
+		super();
+		this.nom = nom;
+		this.prenom = prenom;
+		this.dateNaissance = dateNaissance;
+		this.adresse = adresse;
+		this.banque = banque;
 	}
 
 	/** Getter
